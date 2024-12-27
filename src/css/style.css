@@ -13,14 +13,24 @@ body, html {
     align-items: center;
     justify-content: center;
     height: 100%; 
-
 }
 
 .logo {
     stroke-width: 1; 
     stroke-dasharray: 500; /* To create a border drawing effect */
     stroke-dashoffset: 500; /* Hide the border initially */
-    animation: vector-stroke-animation 1.5s ease-out both; 
+}
+
+.logo.s0, .logo.s1 { 
+    animation: vector-stroke-animation 2s ease-in-out forwards;
+} 
+
+.logo.s2, .logo.s3 {
+    animation: text-stroke-animation 2s ease-in-out forwards;
+}
+
+stop {
+    animation: gradient-fade 1s 1s ease-in-out forwards;
 }
 
 .slogan .s2 {
@@ -38,8 +48,44 @@ body, html {
         stroke-dashoffset: 500;
         stroke: #2d368e;
         fill: transparent;
+        opacity: 0;
+    }
+    50% {
+        stroke-dashoffset: 0;
+        stroke: #2d368e;
+        fill: transparent;
+        opacity: 1;
     }
     80% {
+        stroke-dashoffset: 0;
+        stroke: transparent;
+        fill: var(--fill--color);
+        opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        stroke: transparent;
+        fill: var(--fill--color);
+        opacity: 1;
+    }
+}
+
+@keyframes gradient-fade {
+    0% {
+      stop-opacity: 0; 
+    }
+    100% {
+      stop-opacity: 1; 
+    }
+}
+
+@keyframes text-stroke-animation {
+    0% {
+        stroke-dashoffset: 500;
+        stroke: #2d368e;
+        fill: transparent;
+    }
+    50% {
         stroke-dashoffset: 0;
         stroke: #2d368e;
         fill: transparent;
@@ -47,13 +93,14 @@ body, html {
     100% {
         stroke-dashoffset: 0;
         stroke: transparent;
+        fill: var(--fill--color);
     }
 }
-  
-.logo.s0 { fill: url(#g1) } 
-.logo.s1 { fill: url(#g2) } 
-.logo.s2 { fill: #2d368e } 
-.logo.s3 { fill: #73be44 } 
+
+.logo.s0 { --fill--color: url(#g1); } 
+.logo.s1 { --fill--color: url(#g2) } 
+.logo.s2 { --fill--color: #2d368e } 
+.logo.s3 { --fill--color: #73be44 } 
 
 /* Effect for the slogan */
 @keyframes fadeInLeft {
